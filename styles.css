@@ -25,7 +25,7 @@ li {
     flex-direction: column;
     padding: 1.5em;
     background-color: var(--OCEAN-BLUE);
-    gap: 3em;
+    gap: 4.5em;
 }
 
 .logo {
@@ -48,6 +48,7 @@ li {
 .sidebar-action-list {
     display: flex;
     flex-direction: column;
+    gap: 1.5em;
 }
 
 .sidebar-action-list a {
@@ -61,6 +62,10 @@ li {
 
 .sidebar-action svg {
     fill: white;
+}
+
+.sidebar-action p {
+    margin: 0;
 }
 
 .sidebar-action-list a:link,
