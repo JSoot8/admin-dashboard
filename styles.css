@@ -125,8 +125,6 @@ li {
 
 .user-info img {
     border-radius: 50%;
-    width: var(--avatar-size-regular);
-    height: var(--avatar-size-regular);
 }
 
 .user-info h2 {
@@ -141,8 +139,6 @@ li {
 
 .greeting img {
     border-radius: 50%;
-    width: var(--avatar-size-big);
-    height: var(--avatar-size-big);
 }
 
 .greeting p {
@@ -177,4 +173,19 @@ li {
 .dashboard-aside {
     display: flex;
     flex-direction: column;
+}
+
+.avatar-sm,
+.avatar-med {
+    border-radius: 50%;
+}
+
+.avatar-sm {
+    width: var(--avatar-size-regular);
+    height: var(--avatar-size-regular);
+}
+
+.avatar-med {
+    width: var(--avatar-size-big);
+    height: var(--avatar-size-big);
 }
