@@ -1,3 +1,7 @@
+.preload * {
+    transition: none !important;
+}
+
 *:not(dialog) {
   margin: 0;
 }
@@ -17,6 +21,11 @@ li {
     --LIGHT-GREY: #D3D3D3;
     --avatar-size-regular: 50px;
     --avatar-size-big: 90px;
+    --TRANSITION-MAIN: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu-button {
+    display: none;
 }
 
 .main-container {
@@ -86,11 +95,11 @@ li {
 .page-header {
     grid-area: header;
     display: grid;
+    position: relative;
     grid-template-columns: 2fr 1fr;
     box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
     padding: 1em 2em;
     row-gap: 2em;
-    z-index: 0;
 }
 
 .search-form {
@@ -268,4 +277,157 @@ li {
 .avatar-med {
     width: var(--avatar-size-big);
     height: var(--avatar-size-big);
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas: 
+        'header'
+        'main';
+    }
+
+    .page-header {
+        padding: 1em 0;
+        grid-area: header;
+        display: grid;
+        grid-template-columns: 1fr;
+        box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
+        row-gap: 2em;
+        z-index: 0;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .user-info {
+        display: none;
+    }
+
+    .user-actions {
+        justify-self: center;
+    }
+
+    #search-bar {
+        width: clamp(100px, 80%, 300px);
+    }
+
+    .no-overflow {
+        overflow-y: hidden;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 1.5em;
+        background-color: var(--OCEAN-BLUE);
+        gap: 4.5em;
+        transition: transform var(--TRANSITION-MAIN);
+        transform: translateX(-100%);
+    }
+
+    .is-active {
+        transform: translateX(0);
+        transition: transform var(--TRANSITION-MAIN);
+        z-index: 10;
+    }
+
+    .sidebar-shadow {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 9;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .main-content {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .projects-section {
+        flex-grow: 0;
+    }
+
+    .main-content > *:not(:last-child),
+    .dashboard-aside > *:not(:last-child) {
+        margin-bottom: 1em;
+    }
+
+    .announcements {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .projects-shell,
+    .announcements-shell,
+    .trending-shell {
+        display: grid;
+        grid-template-rows: 1fr;
+        transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+    }
+
+    .is-hidden {
+        grid-template-rows: 0fr;
+    } 
+
+    .trending,
+    .announcements,
+    .projects {
+        min-height: 0; /* Crucial: allows the grid to actually collapse to 0 */
+        transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .announcements-shell.is-hidden .announcements,
+    .trending-shell.is-hidden .trending,
+    .projects-shell.is-hidden .projects {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    h3 {
+        cursor: pointer;
+    }
+
+    h3::after {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000000' d='M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z' /%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        transition: transform 0.3s ease;
+    }
+
+    .section-container:has(.is-hidden) h3::after {
+        transform: rotate(180deg);
+    }
+
+    .mobile-menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .mobile-menu-button svg {
+        width: 24px;
+        height: 36px;
+    }
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
