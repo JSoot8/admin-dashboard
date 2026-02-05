@@ -309,7 +309,7 @@ li {
     }
 
     #search-bar {
-        width: clamp(100px, 80%, 300px);
+        width: 100%;
     }
 
     .no-overflow {
@@ -396,6 +396,7 @@ li {
 
     h3 {
         cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
     }
 
     h3::after {
@@ -428,6 +429,11 @@ li {
     .wrapper {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
+        justify-self: stretch;
+    }
+
+    h3:focus:not(:focus-visible) {
+        outline: none;
     }
 }
